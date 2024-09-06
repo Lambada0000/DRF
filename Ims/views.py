@@ -1,12 +1,17 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from Ims.models import Course, Lesson
-from Ims.serializers import CourseSerializer, LessonSerializer
+from Ims.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer
 
 
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return CourseSerializer
+        return CourseDetailSerializer
 
 
 class LessonCreateAPIView(CreateAPIView):
