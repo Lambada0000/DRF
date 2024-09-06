@@ -6,7 +6,7 @@ from Ims.models import Course, Lesson
 class CourseSerializer(ModelSerializer):
     class Meta:
         model = Course
-        fields = ("id", "name", "description")
+        fields = "__all__"
 
 
 class LessonSerializer(ModelSerializer):
