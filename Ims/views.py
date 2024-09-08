@@ -6,12 +6,11 @@ from Ims.serializers import CourseSerializer, LessonSerializer, CourseDetailSeri
 
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
-    serializer_class = CourseSerializer
 
     def get_serializer_class(self):
-        if self.action == "retrieve":
-            return CourseSerializer
-        return CourseDetailSerializer
+        if self.action == 'retrieve':  # Для детализированного просмотра
+            return CourseDetailSerializer
+        return CourseSerializer  # Для всех остальных действий
 
 
 class LessonCreateAPIView(CreateAPIView):
