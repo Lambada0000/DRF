@@ -23,8 +23,8 @@ class CourseDetailSerializer(ModelSerializer):
         return obj.lesson_set.count()
 
     def get_lessons(self, course):
-        return [lesson.description for lesson in Lesson.objects.filter(course=course)]
+        return [lesson.name for lesson in Lesson.objects.filter(course=course)]
 
     class Meta:
         model = Course
-        fields = ("name", "description", "lesson_count_in_course")
+        fields = ("name", "description", "lesson_count_in_course", "lessons")  # Добавлено поле lessons
