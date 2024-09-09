@@ -27,4 +27,9 @@ class CourseDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ("name", "description", "lesson_count_in_course", "lessons")  # Добавлено поле lessons
+        fields = (
+            "name",
+            "description",
+            "lesson_count_in_course",
+            "lessons",
+        )  # Добавлено поле lessons
