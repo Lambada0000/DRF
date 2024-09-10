@@ -17,6 +17,26 @@ class LessonSerializer(ModelSerializer):
         fields = "__all__"
 
 
+class LessonDetailSerializer(ModelSerializer):
+    course_info = SerializerMethodField()
+
+    def get_course_info(self, lesson):
+        if lesson.course.id:
+            return {
+                "name": lesson.course.name,
+                "id": lesson.course.id,
+            }
+        return None
+
+    class Meta:
+        model = Lesson
+        fields = (
+            "name",
+            "description",
+            "course_info",
+        )
+
+
 class CourseDetailSerializer(ModelSerializer):
     lesson_count_in_course = SerializerMethodField()
     lessons = SerializerMethodField()
