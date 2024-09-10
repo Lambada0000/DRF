@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from Ims.models import Course, Lesson
 from Ims.serializers import (CourseDetailSerializer, CourseSerializer,
-                             LessonSerializer)
+                             LessonSerializer, LessonDetailSerializer)
 
 
 class CourseViewSet(ModelViewSet):
@@ -40,6 +40,9 @@ class LessonListAPIView(ListAPIView):
 class LessonRetrieveAPIView(RetrieveAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+
+    def get_serializer_class(self):
+        return LessonDetailSerializer
 
 
 class LessonUpdateAPIView(UpdateAPIView):
