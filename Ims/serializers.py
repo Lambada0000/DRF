@@ -20,11 +20,14 @@ class LessonSerializer(ModelSerializer):
 class CourseDetailSerializer(ModelSerializer):
     lesson_count_in_course = SerializerMethodField()
     lessons = SerializerMethodField()
-    owner_email = SerializerMethodField()
+    owner_info = SerializerMethodField()
 
-    def get_owner_email(self, course):
+    def get_owner_info(self, course):
         if course.owner:
-            return course.owner.email
+            return {
+                "email": course.owner.email,
+                "id": course.owner.id,
+            }
         return None
 
     def get_lesson_count_in_course(self, obj):
@@ -38,7 +41,7 @@ class CourseDetailSerializer(ModelSerializer):
         fields = (
             "name",
             "description",
-            "owner_email",
+            "owner_info",
             "lesson_count_in_course",
             "lessons",
         )
