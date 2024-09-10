@@ -25,7 +25,6 @@ class Course(models.Model):
         help_text="Выберите владельца курса",
         blank=True,
         null=True,
-
     )
 
     class Meta:
@@ -74,7 +73,6 @@ class Lesson(models.Model):
         help_text="Выберите владельца урока",
         blank=True,
         null=True,
-
     )
 
     class Meta:
