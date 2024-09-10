@@ -2,7 +2,6 @@ from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 
 from Ims.models import Course, Lesson
-from users.models import User
 
 
 class CourseSerializer(ModelSerializer):
