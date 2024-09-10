@@ -2,6 +2,7 @@ from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 
 from Ims.models import Course, Lesson
+from users.models import User
 
 
 class CourseSerializer(ModelSerializer):
@@ -19,6 +20,12 @@ class LessonSerializer(ModelSerializer):
 class CourseDetailSerializer(ModelSerializer):
     lesson_count_in_course = SerializerMethodField()
     lessons = SerializerMethodField()
+    owner_email = SerializerMethodField()
+
+    def get_owner_email(self, course):
+        if course.owner:
+            return course.owner.email
+        return None
 
     def get_lesson_count_in_course(self, obj):
         return obj.lesson_set.count()
@@ -31,6 +38,7 @@ class CourseDetailSerializer(ModelSerializer):
         fields = (
             "name",
             "description",
+            "owner_email",
             "lesson_count_in_course",
             "lessons",
-        )  # Добавлено поле lessons
+        )
