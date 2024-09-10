@@ -6,6 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from Ims.models import Course, Lesson
 from Ims.serializers import (CourseDetailSerializer, CourseSerializer,
                              LessonSerializer, LessonDetailSerializer)
+from users.permissions import IsModer, IsOwner
 
 
 class CourseViewSet(ModelViewSet):
@@ -20,6 +21,15 @@ class CourseViewSet(ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def get_permissions(self):
+        if self.action == "create":
+            self.permission_classes = (~IsModer,)
+        elif self.action in ["update", "retrieve"]:
+            self.permission_classes = (IsModer | IsOwner,)
+        elif self.action == "destroy":
+            self.permission_classes = (IsOwner | ~IsModer,)
+        return super().get_permissions()
 
 
 class LessonCreateAPIView(CreateAPIView):
