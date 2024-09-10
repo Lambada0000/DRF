@@ -22,8 +22,8 @@ class LessonDetailSerializer(ModelSerializer):
     def get_course_info(self, lesson):
         if lesson.course.id:
             return {
-                "name": lesson.course.name,
-                "id": lesson.course.id,
+                "course_name": lesson.course.name,
+                "course_id": lesson.course.id,
             }
         return None
 
