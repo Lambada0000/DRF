@@ -14,7 +14,7 @@ from Ims.apps import ImsConfig
 app_name = ImsConfig.name
 
 router = SimpleRouter()
-router.register(r"course", CourseViewSet, basename="course")
+router.register("", CourseViewSet, basename="course")
 
 urlpatterns = [
     path("lesson/", LessonListAPIView.as_view(), name="lessons_list"),
