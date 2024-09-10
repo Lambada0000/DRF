@@ -57,14 +57,14 @@ class Payments(models.Model):
         default=now, verbose_name="Дата оплаты", blank=True, null=True
     )
     course = models.ForeignKey(
-        Course,
+        "Ims.Course",
         verbose_name="Курс",
         on_delete=models.CASCADE,
         blank=True,
         null=True,
     )
     lesson = models.ForeignKey(
-        Lesson,
+        "Ims.Lesson",
         verbose_name="Урок",
         on_delete=models.CASCADE,
         blank=True,
