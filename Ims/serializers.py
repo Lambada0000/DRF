@@ -1,7 +1,9 @@
+from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 
 from Ims.models import Course, Lesson
+from Ims.validators import validate_video_url
 
 
 class CourseSerializer(ModelSerializer):
@@ -11,6 +13,8 @@ class CourseSerializer(ModelSerializer):
 
 
 class LessonSerializer(ModelSerializer):
+    video_url = serializers.URLField(validators=[validate_video_url])
+
     class Meta:
         model = Lesson
         fields = "__all__"
@@ -32,6 +36,7 @@ class LessonDetailSerializer(ModelSerializer):
         fields = (
             "name",
             "description",
+            "video_url",
             "course_info",
         )
 
