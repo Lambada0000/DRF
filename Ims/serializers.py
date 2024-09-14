@@ -13,15 +13,15 @@ class CourseSerializer(ModelSerializer):
 
 
 class LessonSerializer(ModelSerializer):
-    video_url = serializers.URLField(validators=[validate_video_url])
 
     class Meta:
         model = Lesson
-        fields = "__all__"
+        fields = ("name", "description", "preview_image")
 
 
 class LessonDetailSerializer(ModelSerializer):
     course_info = SerializerMethodField()
+    video_url = serializers.URLField(validators=[validate_video_url])
 
     def get_course_info(self, lesson):
         if lesson.course.id:
@@ -36,6 +36,7 @@ class LessonDetailSerializer(ModelSerializer):
         fields = (
             "name",
             "description",
+            "preview_image",
             "video_url",
             "course_info",
         )
