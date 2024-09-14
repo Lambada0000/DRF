@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 
-from Ims.models import Course, Lesson
+from Ims.models import Course, Lesson, Subscription
 from Ims.validators import validate_video_url
 
 
@@ -70,3 +70,9 @@ class CourseDetailSerializer(ModelSerializer):
             "lesson_count_in_course",
             "lessons",
         )
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = "__all__"
