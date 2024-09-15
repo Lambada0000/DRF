@@ -4,6 +4,7 @@ from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
+from Ims.views import SubscriptionAPIView, SubscriptionListAPIView
 from users.apps import UsersConfig
 from users.views import (PaymentsViewSet, UserCreateAPIView,
                          UserDestroyAPIView, UserListAPIView,
@@ -34,6 +35,12 @@ urlpatterns = [
         TokenRefreshView.as_view(permission_classes=(AllowAny,)),
         name="token_refresh",
     ),
+    path(
+        "subs/create/",
+        SubscriptionAPIView.as_view(),
+        name="subscription_create",
+    ),
+    path("subs/", SubscriptionListAPIView.as_view(), name="subscription_list"),
 ]
 
 urlpatterns += router.urls
