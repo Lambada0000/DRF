@@ -8,7 +8,7 @@ from Ims.views import SubscriptionAPIView, SubscriptionListAPIView
 from users.apps import UsersConfig
 from users.views import (PaymentsViewSet, UserCreateAPIView,
                          UserDestroyAPIView, UserListAPIView,
-                         UserRetrieveAPIView, UserUpdateAPIView)
+                         UserRetrieveAPIView, UserUpdateAPIView, PaymentsCreateAPIView)
 
 app_name = UsersConfig.name
 
@@ -41,6 +41,7 @@ urlpatterns = [
         name="subscription_create",
     ),
     path("subs/", SubscriptionListAPIView.as_view(), name="subscription_list"),
+    path("payment/", PaymentsCreateAPIView.as_view(), name="payment"),
 ]
 
 urlpatterns += router.urls
