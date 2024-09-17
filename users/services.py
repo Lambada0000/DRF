@@ -10,12 +10,13 @@ def create_stripe_product(name):
     return product
 
 
-def create_stripe_price(amount):
+def create_stripe_price(amount, product_id):
     """ Создание цены в Stripe"""
     return stripe.Price.create(
         currency="rub",
         unit_amount=amount * 100,
         product_data={"name": "purchased"},
+        product=product_id,
     )
 
 
