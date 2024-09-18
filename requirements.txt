@@ -14,3 +14,6 @@ drf-yasg==1.21.7
 setuptools==75.0.0
 requests==2.32.3
 stripe==10.11.0
+celery==5.4.0
+eventlet==0.37.0
+django-celery-beat==2.7.0
