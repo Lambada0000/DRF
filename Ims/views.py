@@ -12,6 +12,7 @@ from Ims.paginations import CustomPagination
 from Ims.serializers import (CourseDetailSerializer, CourseSerializer,
                              LessonSerializer, LessonDetailSerializer, SubscriptionSerializer)
 from users.permissions import IsModer, IsOwner
+from tasks import start_mailshot
 
 
 class CourseViewSet(ModelViewSet):
@@ -26,6 +27,11 @@ class CourseViewSet(ModelViewSet):
     def perform_create(self, serializer):
         course = serializer.save()
         course.owner = self.request.user
+        course.save()
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        start_mailshot.delay(course)
         course.save()
 
     def get_permissions(self):
