@@ -12,7 +12,7 @@ from Ims.paginations import CustomPagination
 from Ims.serializers import (CourseDetailSerializer, CourseSerializer,
                              LessonSerializer, LessonDetailSerializer, SubscriptionSerializer)
 from users.permissions import IsModer, IsOwner
-from tasks import start_mailshot
+from Ims.tasks import start_mailshot
 
 
 class CourseViewSet(ModelViewSet):
