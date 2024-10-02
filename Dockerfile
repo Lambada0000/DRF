@@ -1,15 +1,12 @@
+# Используем базовый образ Python
 FROM python:3.12-slim
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем только файл с зависимостями
-COPY pyproject.toml poetry.lock ./
+COPY requirements.txt .
 
-# Устанавливаем Poetry и зависимости
-RUN pip install poetry && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-dev --no-root
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Копируем остальной код
 COPY . .
-
-CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver"]
