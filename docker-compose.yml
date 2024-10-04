@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  redis:
+    image: redis:latest
+    restart: on-failure
+
   db:
     image: postgres:16-alpine
     restart: on-failure
@@ -27,6 +31,28 @@ services:
         condition: service_healthy
     volumes:
       - .:/app
+
+  celery:
+    build: .
+    command: celery -A config worker -l INFO
+    restart: on-failure
+    volumes:
+      - .:/app
+    depends_on:
+    - redis
+    - db
+    - app
+
+  celery-beat:
+    build: .
+    command: celery -A config beat -l INFO
+    restart: on-failure
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
+      - app
 
 volumes:
   pg_data:
